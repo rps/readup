@@ -141,6 +141,12 @@ controllers.controller('FormController', ['$scope', '$http', '$modal', '$q', 'ta
   $scope.getSuggestedData = function(link) {
     var urlRegEx = /(http|https|ftp):\/\/[-a-zA-Z0-9@:%_\+.~#?&\/\/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?$&\/\/=]*)?/gi;
 
+    //No error message if no link
+    if(link.length === 0){
+      $scope.suggestedData = '';
+      return;
+    }
+
     //If entered data doesn't match the URL regex, then return error data, and don't actually make the AJAX request.
     if (!urlRegEx.test(link)) {
       var badURL = {warning: "Snap! That link came back with nothing. How about pasting it in?", tags: []};
